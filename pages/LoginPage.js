@@ -10,7 +10,7 @@ exports.LoginPage = class LoginPage {
   }
 
   async gotoLoginPage() {
-    await this.page.goto("/", {
+    await this.page.goto("/home", {
       waitUntil: "domcontentloaded",
     });
   }

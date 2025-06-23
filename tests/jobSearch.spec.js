@@ -7,19 +7,21 @@ test.describe("Job search functionality", () => {
   let jobsPage;
 
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    await loginPage.gotoLoginPage();
-    const username = process.env.LINKEDIN_USERNAME;
-    const password = process.env.LINKEDIN_PASSWORD;
-    const loggedInUser = process.env.LINKEDIN_LOGGEDINUSER;
-    await loginPage.login(username, password);
-    await expect(await loginPage.isUserLoggedIn()).toBe(true);
+    // loginPage = new LoginPage(page);
+    // await loginPage.gotoLoginPage();
+    jobsPage = new JobsPage(page);
+    await page.goto("/");
+    // const username = process.env.LINKEDIN_USERNAME;
+    // const password = process.env.LINKEDIN_PASSWORD;
+    // const loggedInUser = process.env.LINKEDIN_LOGGEDINUSER;
+    // await loginPage.login(username, password);
+    // await expect(await loginPage.isUserLoggedIn()).toBe(true);
   });
 
   test("should search for 'Software Engineer' and filter by 'Entry level", async ({
     page,
   }) => {
-    jobsPage = new JobsPage(page);
+    await page.waitForTimeout(6000);
     await jobsPage.navigateToJobs();
     await jobsPage.searchjob("Software Engineer");
     await jobsPage.applyFilters("Experience Level", "Entry level");

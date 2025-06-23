@@ -27,7 +27,10 @@ exports.JobsPage = class JobsPage {
   }
 
   async navigateToJobs() {
-    await this.jobsNavLink.click();
+    await Promise.all([
+      this.page.waitForNavigation({ waitUntil: "domcontentloaded" }),
+      this.jobsNavLink.click(),
+    ]);
   }
 
   async searchjob(keyword) {
